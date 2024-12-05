@@ -7,13 +7,13 @@
 class Interface {
 protected:
     int iteration = 0;   // Compteur d'itérations
-    int delay = 500;     // Délai initial par défaut (ms)
+    double delay = 100.0;    // Délai initial par défaut (ms)
 
 public:
     virtual void render(sf::RenderWindow& window) = 0; // Méthode virtuelle pure
     virtual void updateGrid() = 0;                    // Méthode virtuelle pure
-    void setDelay(int newDelay);              // Implémentation par défaut
-    int getDelay() const;                     // Implémentation par défaut
+    void setDelay(double newDelay);
+    double getDelay() const;               // Implémentation par défaut
 
 
     // Gestion des entrées clavier

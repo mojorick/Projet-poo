@@ -92,7 +92,7 @@ void GameOfLife::run() {
         }
 
         // Utilisation de getDelay() pour la pause
-        std::this_thread::sleep_for(std::chrono::milliseconds(getDelay()));
+        std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(getDelay()));
         iteration++;
     }
 
