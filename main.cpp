@@ -3,7 +3,7 @@
 #include <string>
 
 int main() {
-    int cellSize = 15; // Taille des cellules graphiques
+    int cellSize = 20; // Taille des cellules graphiques
     int delay;
     std::string inputFile;
 
@@ -14,7 +14,8 @@ int main() {
     std::cin >> delay;
 
     try {
-        GameOfLife game(inputFile, cellSize, delay);
+        GameOfLife game(inputFile, cellSize);
+        game.setDelay(delay);
         game.run();
     } catch (const std::exception& e) {
         std::cerr << "Erreur : " << e.what() << "\n";

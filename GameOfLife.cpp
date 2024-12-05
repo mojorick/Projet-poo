@@ -2,8 +2,9 @@
 #include <iostream>
 #include <string>
 
-GameOfLife::GameOfLife(const std::string& filename, int cellSize, int delayMs)
-    : grid(filename), fileHandler(std::filesystem::path(filename).stem()), delay(delayMs), cellSize(cellSize) {
+// Modifié : pas de délai dans le constructeur
+GameOfLife::GameOfLife(const std::string& filename, int cellSize)
+    : grid(filename), fileHandler(std::filesystem::path(filename).stem()), cellSize(cellSize) {
     width = grid.getGrid()[0].size();
     height = grid.getGrid().size();
 }
@@ -32,7 +33,7 @@ void GameOfLife::render(sf::RenderWindow& window) {
             window.draw(cell);
         }
     }
-    // Dessiner les lignes de la grille
+    /*// Dessiner les lignes de la grille
     sf::VertexArray gridLines(sf::Lines);
 
     // Lignes horizontales
@@ -47,48 +48,32 @@ void GameOfLife::render(sf::RenderWindow& window) {
         gridLines.append(sf::Vertex(sf::Vector2f(i * cellSize, height * cellSize), sf::Color::White));
     }
 
-    window.draw(gridLines);
+    window.draw(gridLines);*/
     window.display();
 }
 
-
-
 void GameOfLife::updateGrid() {
     grid.update();
-}
-
-void GameOfLife::setDelay(int newDelay) {
-    delay = newDelay;
-}
-
-int GameOfLife::getDelay() const {
-    return delay;
 }
 
 void GameOfLife::run() {
     sf::RenderWindow window(sf::VideoMode(width * cellSize, height * cellSize), "Jeu de la Vie");
 
     while (window.isOpen()) {
-        // Gestion des événements SFML
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-                return; // Quitter la boucle
+                return;
             }
+            handleInput(event); // Gestion des entrées
         }
 
-        // Affichage console
-        std::cout << "Iteration " << iteration << ":\n"; // Utilise iteration directement
+        std::cout << "Iteration " << iteration << ":\n";
         grid.display();
 
-        // Sauvegarde de l'état actuel de la grille
         fileHandler.saveGridToFile(grid.getGrid(), iteration);
-
-        // Affichage graphique
         render(window);
-
-        // Mise à jour de la grille
         updateGrid();
 
         std::string currentState = grid.toString();
@@ -96,7 +81,7 @@ void GameOfLife::run() {
         if (!previousStates.empty()) {
             if (previousStates.back() == currentState) {
                 std::cout << "La grille n'évolue plus, arrêt de la simulation.\n";
-                break; // Quitte la boucle
+                break;
             }
         }
 
@@ -106,23 +91,22 @@ void GameOfLife::run() {
             previousStates.erase(previousStates.begin());
         }
 
-
-        // Pause entre deux itérations
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-        iteration++; // Incrémente correctement
+        // Utilisation de getDelay() pour la pause
+        std::this_thread::sleep_for(std::chrono::milliseconds(getDelay()));
+        iteration++;
     }
 
-    // Garder la fenêtre ouverte après la fin de la simulation
+    // Garder la fenêtre ouverte
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            handleInput(event);
         }
-
-        // Réafficher l'état final dans la fenêtre graphique
         render(window);
     }
 }
 
+ 
