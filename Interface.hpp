@@ -7,7 +7,7 @@
 class Interface {
 protected:
     int iteration = 0;   // Compteur d'itérations
-    double delay = 100.0;    // Délai initial par défaut (ms)
+    double delay;    // Délai initial par défaut (ms)
 
 public:
     virtual void render(sf::RenderWindow& window) = 0; // Méthode virtuelle pure
