@@ -2,20 +2,22 @@
 
 void Interface::setDelay(double newDelay) {
     delay = newDelay;
-    std::cout << "Nouveau délai défini : " << delay << " ms.\n";
+    std::cout << "Nouveau délai défini : " << delay << " ms." << std::endl;
 }
 
 double Interface::getDelay() const {
     return delay;
 }
 
+
 void Interface::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Up) {
             setDelay(getDelay() + 5); // Augmenter de 5 ms
         } else if (event.key.code == sf::Keyboard::Down) {
-            setDelay(std::max(5.0, getDelay() - 5)); // Ne pas aller en dessous de 5 ms
+            double newDelay = std::max(0.1, getDelay() - 5); // Assurez-vous qu'il ne descende pas en dessous de 0.1 ms
+            setDelay(newDelay);
         }
-        std::cout << "Délai actuel : " << delay << " ms\n";
+        std::cout << "Délai actuel : " << getDelay() << " ms\n";
     }
 }
