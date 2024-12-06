@@ -13,14 +13,38 @@ Grid::Grid(const std::string& filename) {
     }
 
     file >> rows >> cols;
+    if (rows <= 0 || cols <= 0) {
+        throw std::runtime_error("Dimensions de la grille invalides.");
+    }
+
     grid.resize(rows, std::vector<int>(cols, 0));
     nextGrid.resize(rows, std::vector<int>(cols, 0));
+
+    // Lire les données et vérifier leur cohérence
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (!(file >> grid[i][j])) {
+                throw std::runtime_error("Fichier d'entrée incomplet ou mal formaté.");
+            }
+            // Vérifier que les valeurs sont valides (par exemple, 0, 1, 2 ou 3)
+            if (grid[i][j] < 0 || grid[i][j] > 3) {
+                throw std::runtime_error("Valeur de cellule invalide détectée dans le fichier d'entrée.");
+            }
+        }
+    }
+
+    // Vérifier s'il y a des données supplémentaires dans le fichier
+    int extraData;
+    if (file >> extraData) {
+        throw std::runtime_error("Fichier d'entrée contient des données supplémentaires inattendues.");
+    }
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             file >> grid[i][j];
         }
     }
+
 
     file.close();
 }
