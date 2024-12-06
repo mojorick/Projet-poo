@@ -3,7 +3,7 @@
 #include <string>
 
 int main() {
-    int cellSize = 5; // Taille des cellules graphiques
+    int cellSize = 4; // Taille des cellules graphiques
     int delay;
     std::string inputFile;
 
