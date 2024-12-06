@@ -3,14 +3,14 @@
 #include <string>
 
 int main() {
-    int cellSize = 5; // Taille des cellules graphiques
+    int cellSize = 10; // Taille des cellules
     int delay;
     std::string inputFile;
 
-    std::cout << "Entrez le chemin du fichier de grille d'entrée (ex: grille.txt) : ";
+    std::cout << "Entrez le chemin du fichier d'entrée (ex: grille.txt) : ";
     std::getline(std::cin, inputFile);
 
-    std::cout << "Entrez le délai entre deux itérations (en millisecondes, ex: 500) : ";
+    std::cout << "Entrez le délai entre deux itérations (ms) : ";
     std::cin >> delay;
 
     try {

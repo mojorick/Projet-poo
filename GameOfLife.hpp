@@ -13,17 +13,16 @@
 
 class GameOfLife : public Interface {
 private:
-    Grid grid;                              // Instance de la grille
-    FileHandler fileHandler;                // Gestionnaire de fichiers
-    std::vector<std::string> previousStates; // Ensemble des états précédents                           
-    int cellSize;                           // Taille des cellules pour l'interface
-    int width, height;   // Dimensions de la grille        
+    Grid grid;
+    FileHandler fileHandler;
+    std::vector<std::string> previousStates;
+    int cellSize;
+    int width, height;
 
 public:
-    GameOfLife(const std::string& filename, int cellSize); // Initialise le jeu
-    void run();                   // Implémente la logique complète (console + interface)
+    GameOfLife(const std::string& filename, int cellSize);
+    void run();
 
-    // Implémentations des méthodes virtuelles de Interface
     void render(sf::RenderWindow& window) override;
     void updateGrid() override;
 };

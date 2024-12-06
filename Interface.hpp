@@ -6,20 +6,17 @@
 
 class Interface {
 protected:
-    int iteration = 0;   // Compteur d'itérations
-    double delay = 100.0;    // Délai initial par défaut (ms)
+    int iteration = 0;     // Compteur d'itérations
+    double delay = 500.0;  // Délai initial (ms)
 
 public:
     virtual void render(sf::RenderWindow& window) = 0; // Méthode virtuelle pure
     virtual void updateGrid() = 0;                    // Méthode virtuelle pure
-    void setDelay(double newDelay);
-    double getDelay() const;               // Implémentation par défaut
+    virtual ~Interface() = default;
 
-
-    // Gestion des entrées clavier
-    void handleInput(const sf::Event& event); // Gestion générique des entrées
-
-    virtual ~Interface() = default;            // Destructeur virtuel
+    void setDelay(double newDelay); // Change le délai
+    double getDelay() const;        // Retourne le délai
+    void handleInput(const sf::Event& event); // Gère les entrées utilisateur
 };
 
 #endif // INTERFACE_HPP

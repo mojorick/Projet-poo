@@ -8,8 +8,6 @@ namespace fs = std::filesystem;
 
 FileHandler::FileHandler(const std::string& baseName) {
     outputFolder = baseName + "_out";
-
-    // Créer le dossier s'il n'existe pas
     if (!fs::exists(outputFolder)) {
         fs::create_directory(outputFolder);
     }
@@ -30,5 +28,4 @@ void FileHandler::saveGridToFile(const std::vector<std::vector<int>>& grid, int 
         }
         file << "\n";
     }
-    file.close();
 }
