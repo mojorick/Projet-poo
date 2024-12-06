@@ -34,7 +34,6 @@ Grid::Grid(const std::string& filename) {
     }
 
     // Vérifier s'il y a des données supplémentaires dans le fichier
-    int extraData;
     if (file >> extraData) {
         throw std::runtime_error("Fichier d'entrée contient des données supplémentaires inattendues.");
     }
