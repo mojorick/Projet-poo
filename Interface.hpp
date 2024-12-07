@@ -6,7 +6,7 @@
 
 class Interface {
 protected:
-    int iteration = 0;   // Compteur d'itérations
+    int iteration(0);   // Compteur d'itérations
     double delay;    // Délai initial par défaut (ms)
 
 public:
