@@ -1,8 +1,12 @@
 #include "Interface.hpp"
 
 void Interface::setDelay(double newDelay) {
+    if(newDelay<=0){
+        throw std::invalid_argument("delai inferieur a zero");
+    }
     delay = newDelay;
     std::cout << "Nouveau délai défini : " << delay << " ms." << std::endl;
+
 }
 
 double Interface::getDelay() const {
