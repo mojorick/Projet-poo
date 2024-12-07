@@ -7,11 +7,12 @@
 #include <iostream>
 
 class Grid {
+private:
+    int extraData;
 protected:
     std::vector<std::vector<int>> grid;       // Grille actuelle
     std::vector<std::vector<int>> nextGrid;   // Grille pour la prochaine itération
     int rows, cols;                           // Dimensions de la grille
-    int extraData;
 public:
     int countNeighbors(int x, int y) const;   // Compte les voisins vivants autour d'une cellule
     Grid(int rows, int cols);                 // Constructeur par dimensions
